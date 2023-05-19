@@ -281,7 +281,7 @@ pub fn initcolormap() -> Vec<ReturnColor> {
 	/*
 	* makes a colormap with a bunch of lerping. Try to avoid running too much.
 	*/
-	let stops = vec![0.0, 100.0, 125.0, 200.0, 3500.0, 500.0, 650.0, 800.0, 950.0, 1150.0, 1400.0];
+	let stops = vec![0.0, 100.0, 125.0, 200.0, 350.0, 500.0, 650.0, 800.0, 950.0, 1150.0, 1400.0];
 
 	let black = ReturnColor{
 		r: 0,
@@ -490,7 +490,7 @@ pub fn int_calculate(params: &Parameters, precision: u32) -> Storage{
 	let high_y = Float::with_val(precision, params.radius_y.mul_add_ref(&two, &params.low_y));
 	
 	
-	let pool = ThreadPool::new(num_cpus::get());
+	let pool = ThreadPool::new(num_cpus::get()/2);
 	let (tx, rx) = mpsc::channel();
 
 	for x in linspace(&params.low_x, &high_x, width, precision){
