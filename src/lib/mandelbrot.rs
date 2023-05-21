@@ -490,7 +490,7 @@ pub fn int_calculate(params: &Parameters, precision: u32) -> Storage{
 	let high_y = Float::with_val(precision, params.radius_y.mul_add_ref(&two, &params.low_y));
 	
 	
-	let pool = ThreadPool::new(num_cpus::get()/2);
+	let pool = ThreadPool::new(num_cpus::get());
 	let (tx, rx) = mpsc::channel();
 
 	for x in linspace(&params.low_x, &high_x, width, precision){
