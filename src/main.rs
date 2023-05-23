@@ -25,7 +25,7 @@ fn main() {
 		params1.scale(increase);
 	
 		render_image(data, &map, i);
-		println!("{i} frames completed, zoom of {}", params1.zoom);
+		println!("{:.3%}",100*params1.zoom.clone()/last_zoom.clone());
 		if params1.zoom > last_zoom {
 			break;
 		}
