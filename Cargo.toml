@@ -12,6 +12,7 @@ threadpool = "1.8.1"
 image = "0.24.5"
 rug = "1.19.0"
 num_cpus = "1.15.0"
+mandelbrot-core = { git = "https://github.com/michcode2/mandelbrot-core.git"}
 
 [target.'cfg(target_os = "macos")'.dependencies]
 gmp-mpfr-sys = { version = "1.5.0", features=["use-system-libs"]}
@@ -19,9 +20,6 @@ gmp-mpfr-sys = { version = "1.5.0", features=["use-system-libs"]}
 [target.'cfg(not(target_os = "macos"))'.dependencies]
 gmp-mpfr-sys = "1.5.0"
 
-[lib]
-name = "mandelbrot"
-path = "src/lib/mandelbrot.rs"
 
 [[bin]]
 name = "video"
