@@ -11,25 +11,34 @@ fn main() {
 
 	let map = mandelbrot::initcolormap();
 
-	let mut i = 0;
+	let mut i = 0.0;
+
+    let num_images = loop {
+        if (&params1.zoom.to_f64() * increase.powf(i)) > last_zoom {
+            break i;
+        }
+        i += 1.0;
+    };
+
+    let mut i = 0.0;
 
 	loop {
 
 		params1.low_x -= &params1.radius_x;
 		params1.low_y -= &params1.radius_y;
-		let data = mandelbrot::int_calculate(&params1, precision);
+		let data = mandelbrot::cache_calculate(&params1, precision);
 		
 		params1.low_x += &params1.radius_x;
 		params1.low_y += &params1.radius_y;
 
 		params1.scale(increase);
 	
-		render_image(data, &map, i);
-		println!("{:.3%}",100*params1.zoom.clone()/last_zoom.clone());
+		render_image(data, &map, i as usize);
+		println!("{:.3}%",100.0*i/num_images);
 		if params1.zoom > last_zoom {
 			break;
 		}
-		i+=1;
+		i+=1.0;
 	}
 
 	println!("ffmpeg -framerate 30 -pattern_type glob -i '*.png' -c:v libx264 -pix_fmt yuv420p -b:v 1M out.mp4");
